@@ -123,12 +123,15 @@ impl TableStyle {
     }
 
     fn get_grid(table_style: &mut TableStyle, grid: &JsParamValue) {
-        table_style.grid_visible = true;
         if let JsParamValue::Object(grid) = grid {
+            if let Some(visible) = grid.get("visible") {
+                if let JsParamValue::Boolean(visible) = visible {
+                    table_style.grid_visible = *visible;
+                }
+            }
             if let Some(width) = grid.get("width") {
                 if let JsParamValue::Number(width) = width {
                     table_style.grid_width = *width;
-                    //log(&format!("Table grid width is {}", width));
                 }
             }
             if let Some(color) = grid.get("color") {
