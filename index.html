@@ -4,14 +4,33 @@
 <head>
     <meta charset="utf-8" />
     <title>WASM-PDF</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css">
+    <style>
+        #jsonEditor, #pdfDisplay {
+            width: 50%;
+            height: 100vh;
+            display: inline-block;
+        }
+        .CodeMirror {
+            height: 100%;
+        }
+    </style>
 </head>
 
 <body>
-    <p>
-        One moment, creating PDF...
-    </p>
+    <div style="display: flex;">
+        <div id="jsonEditor"></div>
+        <iframe id="pdfDisplay"></iframe>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/javascript/javascript.min.js"></script>
     <script>
         window.addEventListener('DOMContentLoaded', () => {
+            const editor = CodeMirror(document.getElementById('jsonEditor'), {
+                lineNumbers: true,
+                mode: "application/json",
+            });
+
             fetch("./examples/text-example.json")
                 .then(response => {
                     return response.json();
@@ -21,8 +40,14 @@
                     let date = new Date().toLocaleString();
                     let title = doc.contents[0].params;
                     title.text += " (created: " + date + ")";
+                    editor.setValue(JSON.stringify(doc, null, 2));
                     createPDF(doc);
                 });
+
+            editor.on('change', (cm, change) => {
+                let doc = JSON.parse(cm.getValue());
+                createPDF(doc);
+            });
         });
 
         let pdfFileBlobURL = null;
@@ -34,14 +59,8 @@
                 URL.revokeObjectURL(pdfFileBlobURL);
             }
             pdfFileBlobURL = URL.createObjectURL(blob);
-            // for debugging purposes, open another window
-            //window.open(pdfFileBlobURL, "_blank");
-            window.location.href = pdfFileBlobURL;
+            document.getElementById('pdfDisplay').src = pdfFileBlobURL;
         }
-
-        let jsonOut = (data) => {
-            console.log(JSON.stringify(data));
-        };
     </script>
 </body>
 </html>

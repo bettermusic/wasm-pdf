@@ -1,0 +1,117 @@
+{
+  "title": "Praise",
+  "subheading": {
+    "artist": "Unknown",
+    "key": "A",
+    "bpm": "Unknown"
+  },
+  "contents": [
+    {
+      "section": "Intro (2x)",
+      "chord_lyric_pairs": [
+        {
+          "chord": "x",
+          "lyrics": "Let ev'rything that has breath praise the Lord, praise the Lord"
+        }
+      ]
+    },
+    {
+      "section": "Verse 1",
+      "chord_lyric_pairs": [
+        {
+          "chord": "A",
+          "lyrics": "praise in the valley,"
+        },
+        {
+          "chord": "Bm/A",
+          "lyrics": "praise on the"
+        },
+        {
+          "chord": "A",
+          "lyrics": "mountain"
+        },
+        {
+          "chord": "E/A",
+          "lyrics": "praise when I'm sure,"
+        },
+        {
+          "chord": "D/A",
+          "lyrics": "praise when I'm"
+        },
+        {
+          "chord": "A",
+          "lyrics": "doubting"
+        },
+        {
+          "chord": "A",
+          "lyrics": "praise when outnumbered,"
+        },
+        {
+          "chord": "Bm/A",
+          "lyrics": "praise when sur -"
+        },
+        {
+          "chord": "A",
+          "lyrics": "rounded"
+        },
+        {
+          "chord": "E/A",
+          "lyrics": "'Cause praise is the waters"
+        },
+        {
+          "chord": "D/A",
+          "lyrics": "my enemies"
+        },
+        {
+          "chord": "A",
+          "lyrics": "drown in"
+        },
+        {
+          "chord": "E",
+          "lyrics": "As long as I'm breathing,"
+        },
+        {
+          "chord": "D",
+          "lyrics": "I've got a reason to"
+        }
+      ]
+    },
+    {
+      "section": "Chorus 1",
+      "chord_lyric_pairs": [
+        {
+          "chord": "F#m",
+          "lyrics": "Praise"
+        },
+        {
+          "chord": "D",
+          "lyrics": "the"
+        },
+        {
+          "chord": "A",
+          "lyrics": "Lord, oh my"
+        },
+        {
+          "chord": "E",
+          "lyrics": "soul"
+        },
+        {
+          "chord": "F#m",
+          "lyrics": "Praise"
+        },
+        {
+          "chord": "D",
+          "lyrics": "the"
+        },
+        {
+          "chord": "A",
+          "lyrics": "Lord, oh my"
+        },
+        {
+          "chord": "E",
+          "lyrics": "soul"
+        }
+      ]
+    }
+  ]
+}
