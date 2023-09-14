@@ -6,13 +6,24 @@
     <title>WASM-PDF</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.css">
     <style>
-        #jsonEditor, #pdfDisplay {
+        #jsonEditor {
             width: 50%;
             height: 100vh;
             display: inline-block;
+            overflow-x: scroll; /* Enable horizontal scrolling */
+        }
+        #pdfDisplay {
+            width: 80%;
+            height: 90vh;
+            display: inline-block;
+            overflow-x: scroll; /* Enable horizontal scrolling */
         }
         .CodeMirror {
             height: 100%;
+        }
+        #timestamp {
+            width: 100%;
+            text-align: center;
         }
     </style>
 </head>
@@ -20,7 +31,10 @@
 <body>
     <div style="display: flex;">
         <div id="jsonEditor"></div>
-        <iframe id="pdfDisplay"></iframe>
+        <div style="display:flex; flex-direction: column; width:50%; align-items: center;">
+            <div id="timestamp"></div>
+            <iframe id="pdfDisplay"></iframe>
+        </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.3/mode/javascript/javascript.min.js"></script>
@@ -36,7 +50,6 @@
                     return response.json();
                 })
                 .then(doc => {
-                    // Change the title to show date (now)
                     let date = new Date().toLocaleString();
                     let title = doc.contents[0].params;
                     title.text += " (created: " + date + ")";
@@ -45,6 +58,7 @@
                 });
 
             editor.on('change', (cm, change) => {
+                let start = performance.now();
                 let doc = JSON.parse(cm.getValue());
                 createPDF(doc);
             });
@@ -59,7 +73,8 @@
                 URL.revokeObjectURL(pdfFileBlobURL);
             }
             pdfFileBlobURL = URL.createObjectURL(blob);
-            document.getElementById('pdfDisplay').src = pdfFileBlobURL;
+            let pdfDisplay = document.getElementById('pdfDisplay');
+            pdfDisplay.src = pdfFileBlobURL;
         }
     </script>
 </body>

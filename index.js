@@ -1,6 +1,9 @@
 const wasm_pdf = import('./pkg');
 
 const createPDF = (jsDocument) => {
+    let timestamp = document.getElementById('timestamp');
+    timestamp.textContent = "Rendering PDF...";
+    let start = performance.now();
     wasm_pdf.then(pdf => {
         const imagePaths = parseJsDoc(jsDocument.contents);
         fetchImagePaths(imagePaths).then((imgData) => {
@@ -16,6 +19,9 @@ const createPDF = (jsDocument) => {
             });
             pdf.run(jsDocument);
         });
+        let end = performance.now();
+        let time = end - start;
+        timestamp.textContent = "PDF rendered in " + time.toFixed(2) + " milliseconds.";
         //pdf.print_document(jsDocument);
     }).catch(console.error)
 };
